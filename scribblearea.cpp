@@ -50,3 +50,9 @@ void ScribbleArea::setPenWidth(int newWidth)
 {
     myPenWidth = newWidth;
 }
+
+void ScribbleArea::clearImage()
+{
+    image.fill(QColor(255, 255, 255));
+    modified = true; update();
+}
