@@ -56,3 +56,25 @@ void ScribbleArea::clearImage()
     image.fill(QColor(255, 255, 255));
     modified = true; update();
 }
+
+void ScribbleArea::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        lastPoint = event->pos();
+    }
+}
+
+void ScribbleArea::mouseMoveEvent(QMouseEvent *event)
+{
+    if ((event->buttons() & Qt::LeftButton) && scribbling)
+        drawLineTo(event->pos());
+}
+
+void ScribbleArea::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && scribbling) {
+        drawLineTo(event->pos());
+        scribbling = false;
+    }
+}
+
