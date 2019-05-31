@@ -27,15 +27,18 @@ CONFIG += c++11
 SOURCES += \
         drawingform.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        scribblearea.cpp
 
 HEADERS += \
         drawingform.h \
-        mainwindow.h
+        mainwindow.h \
+        scribblearea.h
 
 FORMS += \
         drawingform.ui \
-        mainwindow.ui
+        mainwindow.ui \
+        scribblearea.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
