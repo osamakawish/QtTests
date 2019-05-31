@@ -16,3 +16,16 @@ ScribbleArea::ScribbleArea(QWidget *parent) :
     myPenWidth = 1;
     myPenColor = Qt::blue;
 }
+
+bool ScribbleArea::openImage(const QString &fileName)
+{
+    QImage loadedFile;
+    if(!loadedFile.load(fileName)) return false;
+
+    QSize newSize = loadedFile.size().expandedTo(size());
+    resizeImage(&loadedFile, newSize);
+    image = loadedFile; modified = false;
+    update();
+
+    return true;
+}
