@@ -18,6 +18,8 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_drawingWindowBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     int number;

@@ -276,6 +276,31 @@ QPushButton#pushButton:hover {
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QPushButton" name="drawingWindowBtn">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>230</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#drawingWindowBtn {
+	color:blue;
+	border-radius: 10px;
+	border: 2px solid blue;
+	background-color: #e0e0e0;
+}
+
+QPushButton#drawingWindowBtn:hover {
+	background-color: #f4f4f4
+}</string>
+    </property>
+    <property name="text">
+     <string>Drawing Window</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

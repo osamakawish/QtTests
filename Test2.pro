@@ -25,13 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        drawingform.cpp \
         main.cpp \
         mainwindow.cpp
 
 HEADERS += \
+        drawingform.h \
         mainwindow.h
 
 FORMS += \
+        drawingform.ui \
         mainwindow.ui
 
 # Default rules for deployment.

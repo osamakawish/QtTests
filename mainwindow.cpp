@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "drawingform.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,4 +21,10 @@ void MainWindow::on_pushButton_clicked()
     QLabel *numberLabel = findChild<QLabel *>("number");
     number++;
     numberLabel->setNum(number);
+}
+
+void MainWindow::on_drawingWindowBtn_clicked()
+{
+    DrawingForm* drawingForm = new DrawingForm();
+    drawingForm->show(); // necessary line: opens the window.
 }
