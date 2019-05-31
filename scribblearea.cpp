@@ -32,6 +32,7 @@ bool ScribbleArea::openImage(const QString &fileName)
 
 bool ScribbleArea::saveImage(const QString &fileName, const char* fileFormat)
 {
+    // Q: What does fileFormat do?
     QImage visibleImage = image;
     resizeImage(&visibleImage, size());
 
@@ -40,3 +41,12 @@ bool ScribbleArea::saveImage(const QString &fileName, const char* fileFormat)
     } return false;
 }
 
+void ScribbleArea::setPenColor(const QColor &newColor)
+{
+    myPenColor = newColor;
+}
+
+void ScribbleArea::setPenWidth(int newWidth)
+{
+    myPenWidth = newWidth;
+}
