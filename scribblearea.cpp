@@ -105,3 +105,21 @@ void ScribbleArea::resizeEvent(QResizeEvent *event)
     }
     QWidget::resizeEvent(event);
 }
+
+void ScribbleArea::drawLineTo(const QPoint &endPoint)
+{
+    QPainter painter(&image);
+    painter.setPen(QPen(myPenColor, myPenWidth));
+    painter.drawLine(lastPoint, endPoint);
+
+    modified = true;
+
+    int rad = (myPenWidth / 2) + 2;
+
+    // Calling update() would do a complete repaint. This is more efficient.
+    update(QRect(lastPoint, endPoint).normalized().adjusted(-rad, -rad, +rad, +rad));
+
+    // Next time this method is called, drawLineTo continues from this endPoint.
+    lastPoint = endPoint;
+}
+
