@@ -1,5 +1,9 @@
+#include <QtWidgets>
+
 #include "scribblearea.h"
 #include "ui_scribblearea.h"
+
+class QMouseEvent;
 
 ScribbleArea::ScribbleArea(QWidget *parent) :
     QWidget(parent),

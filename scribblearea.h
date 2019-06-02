@@ -1,7 +1,12 @@
 #ifndef SCRIBBLEAREA_H
 #define SCRIBBLEAREA_H
 
+#include <QColor>
+#include <QImage>
+#include <QPoint>
 #include <QWidget>
+
+class QMouseEvent;
 
 namespace Ui {
 class ScribbleArea;
