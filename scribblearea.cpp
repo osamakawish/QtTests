@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include <QMouseEvent>
 
 #include "scribblearea.h"
 #include "ui_scribblearea.h"
