@@ -91,3 +91,17 @@ void ScribbleArea::paintEvent(QPaintEvent *event)
     painter.drawImage(rect, image, rect);
 }
 
+// Make window size slightly larger than image size.
+void ScribbleArea::resizeEvent(QResizeEvent *event)
+{
+    if (width() > image.width() || height() > image.height()) {
+        int newWidth = qMax(width() + 128, image.width());
+        int newHeight = qMax(height() + 128, image.height());
+
+        // Passing image by reference to change its width and height.
+        resizeImage(&image, QSize(newWidth, newHeight));
+
+        update();
+    }
+    QWidget::resizeEvent(event);
+}
