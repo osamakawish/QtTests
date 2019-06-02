@@ -1,4 +1,5 @@
 #include <QMouseEvent>
+#include <QPainter>
 
 #include "scribblearea.h"
 #include "ui_scribblearea.h"
@@ -80,5 +81,13 @@ void ScribbleArea::mouseReleaseEvent(QMouseEvent *event)
         drawLineTo(event->pos());
         scribbling = false;
     }
+}
+
+// Not entirely sure why rectangles are being drawn. But will see what happens once this is finished.
+void ScribbleArea::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    QRect rect = event->rect();
+    painter.drawImage(rect, image, rect);
 }
 
