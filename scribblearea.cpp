@@ -123,3 +123,22 @@ void ScribbleArea::drawLineTo(const QPoint &endPoint)
     lastPoint = endPoint;
 }
 
+// Resize image on a canvas with size newSize.
+void ScribbleArea::resizeImage(QImage *image, const QSize &newSize)
+{
+    if (image->size() != newSize) {
+        // Creates blank canvas with new size.
+        QImage newImage(newSize, QImage::Format_RGB32);
+        newImage.fill(QColor(255, 255, 255));
+
+        // Repaints the image on the newer canvas.
+        QPainter painter(&newImage);
+        painter.drawImage(QPoint(0,0), *image);
+
+        // Updates image variable.
+        *image = newImage;
+    }
+}
+
+
+
