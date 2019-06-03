@@ -3,6 +3,7 @@
 
 #include <QCloseEvent>
 #include <QFileDialog>
+#include <QColorDialog>
 
 DrawingWindow::DrawingWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -42,4 +43,10 @@ void DrawingWindow::save()
     QAction* action = qobject_cast<QAction*>(sender());
     QByteArray fileFormat = action->data().toByteArray();
     saveFile(fileFormat);
+}
+
+void DrawingWindow::penColor()
+{
+    QColor color = QColorDialog::getColor(scribblearea->penColor());
+    if (color.isValid()) { scribblearea->setPenColor(color); }
 }
