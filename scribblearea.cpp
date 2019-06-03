@@ -4,6 +4,14 @@
 #include "scribblearea.h"
 #include "ui_scribblearea.h"
 
+#if defined(QT_PRINTSUPPORT_LIB)
+#include <QtPrintSupport/qtprintsupportglobal.h>
+#if QT_CONFIG(printdialog)
+#include <QPrinter>
+#include <QPrintDialog>
+#endif
+#endif
+
 class QMouseEvent;
 
 ScribbleArea::ScribbleArea(QWidget *parent) :
@@ -140,5 +148,26 @@ void ScribbleArea::resizeImage(QImage *image, const QSize &newSize)
     }
 }
 
+void ScribbleArea::print()
+{
+#if QT_CONFIG(printdialog) // CONTAINED ERROR  pertaining to division by zero - fixed by adding print dialog in Test2.pro
+    QPrinter printer(QPrinter::HighResolution);
 
+    QPrintDialog printDialog(&printer, this);
+    if (printDialog.exec() == QDialog::Accepted) {
+        // Initiate variables.
+        QPainter painter(&printer);
+        QRect viewportRect = painter.viewport();
+        QSize imageSize = image.size();
+
+        // Scale and set viewport based on image size
+        imageSize.scale(viewportRect.size(), Qt::KeepAspectRatio);
+        painter.setViewport(viewportRect.x(), viewportRect.y(), imageSize.width(), imageSize.height());
+
+        // Draw/"print" the image.
+        painter.setWindow(image.rect());
+        painter.drawImage(0, 0, image);
+    }
+#endif // QT_CONFIG(printdialog)
+}
 

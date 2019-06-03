@@ -8,6 +8,10 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+# Add file dialog and print support.
+requires(qtConfig(filedialog))
+qtHaveModule(printsupport): QT += printsupport
+
 TARGET = Test2
 TEMPLATE = app
 
