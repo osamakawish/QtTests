@@ -122,3 +122,31 @@ void DrawingWindow::createActions()
     aboutQtAct = new QAction(tr("About &Qt"), this);
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 }
+
+void DrawingWindow::createMenus()
+{
+    saveAsMenu = new QMenu(tr("&Save As"), this);
+    foreach (QAction *action, saveAsActs)
+        saveAsMenu->addAction(action);
+
+    fileMenu = new QMenu(tr("&File"), this);
+    fileMenu->addAction(openAct);
+    fileMenu->addMenu(saveAsMenu);
+    fileMenu->addAction(printAct);
+    fileMenu->addSeparator();
+    fileMenu->addAction(exitAct);
+
+    optionMenu = new QMenu(tr("&Options"), this);
+    optionMenu->addAction(penColorAct);
+    optionMenu->addAction(penWidthAct);
+    optionMenu->addSeparator();
+    optionMenu->addAction(clearScreenAct);
+
+    helpMenu = new QMenu(tr("&Help"), this);
+    helpMenu->addAction(aboutAct);
+    helpMenu->addAction(aboutQtAct);
+
+    menuBar()->addMenu(fileMenu);
+    menuBar()->addMenu(optionMenu);
+    menuBar()->addMenu(helpMenu);
+}
