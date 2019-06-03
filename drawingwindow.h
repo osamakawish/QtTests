@@ -42,7 +42,7 @@ private:
     bool saveFile(const QByteArray &fileFormat);
 
     // The scribble area.
-    ScribbleArea *scribblearea;
+    ScribbleArea *scribbleArea;
 
     QMenu *saveAsMenu;
     QMenu *fileMenu;

@@ -4,6 +4,7 @@
 #include <QCloseEvent>
 #include <QFileDialog>
 #include <QColorDialog>
+#include <QInputDialog>
 
 DrawingWindow::DrawingWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,8 +12,8 @@ DrawingWindow::DrawingWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    scribblearea = new ScribbleArea;
-    setCentralWidget(scribblearea);
+    scribbleArea = new ScribbleArea;
+    setCentralWidget(scribbleArea);
 
     createActions(); createMenus();
     setWindowTitle("Scribble");
@@ -32,7 +33,7 @@ void DrawingWindow::open()
         QString filename = QFileDialog::getOpenFileName(this,"Open File",QDir::currentPath());
         // Open file if name received.
         if (!filename.isEmpty()) {
-            scribblearea->openImage(filename);
+            scribbleArea->openImage(filename);
         }
     }
 }
@@ -47,6 +48,18 @@ void DrawingWindow::save()
 
 void DrawingWindow::penColor()
 {
-    QColor color = QColorDialog::getColor(scribblearea->penColor());
-    if (color.isValid()) { scribblearea->setPenColor(color); }
+    QColor color = QColorDialog::getColor(scribbleArea->penColor());
+    if (color.isValid()) { scribbleArea->setPenColor(color); }
+}
+
+void DrawingWindow::penWidth()
+{
+    bool ok;
+    // Input dialog to select pen width between 1 and 50 with step 1.
+    int width = QInputDialog::getInt(this,"Scribble","Select pen width",
+                                     scribbleArea->penWidth(),1,50,1,&ok);
+    // Change pen width based on input.
+    if (ok) {
+        scribbleArea->setPenWidth(width);
+    }
 }
