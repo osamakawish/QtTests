@@ -30,17 +30,20 @@ CONFIG += c++11
 
 SOURCES += \
         drawingform.cpp \
+        drawingwindow.cpp \
         main.cpp \
         mainwindow.cpp \
         scribblearea.cpp
 
 HEADERS += \
         drawingform.h \
+        drawingwindow.h \
         mainwindow.h \
         scribblearea.h
 
 FORMS += \
         drawingform.ui \
+        drawingwindow.ui \
         mainwindow.ui \
         scribblearea.ui
 
