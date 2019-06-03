@@ -16,6 +16,7 @@ public:
     explicit DrawingWindow(QWidget *parent = nullptr);
 
 protected:
+    // Overriding to provide saving option.
     void closeEvent(QCloseEvent *event) override;
 
 private slots:

@@ -1,6 +1,8 @@
 #include "drawingwindow.h"
 #include "ui_drawingwindow.h"
 
+#include <QCloseEvent>
+
 DrawingWindow::DrawingWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::DrawingWindow)
@@ -15,7 +17,9 @@ DrawingWindow::DrawingWindow(QWidget *parent) :
     resize(500,500);
 }
 
-DrawingWindow::~DrawingWindow()
+void DrawingWindow::closeEvent(QCloseEvent *event)
 {
-    delete ui;
+    if (maybeSave()) {event->accept();}
+    else {event->ignore();}
 }
+
