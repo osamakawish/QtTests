@@ -6,6 +6,13 @@ DrawingWindow::DrawingWindow(QWidget *parent) :
     ui(new Ui::DrawingWindow)
 {
     ui->setupUi(this);
+
+    scribblearea = new ScribbleArea;
+    setCentralWidget(scribblearea);
+
+    createActions(); createMenus();
+    setWindowTitle("Scribble");
+    resize(500,500);
 }
 
 DrawingWindow::~DrawingWindow()

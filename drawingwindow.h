@@ -36,6 +36,7 @@ private:
     // Not sure about these methods purposes yet except saveFile.
     void createActions();
     void createMenus();
+    // Checks for unsaved changes. Request to save file if true. False if cancelled.
     bool maybeSave();
     bool saveFile(const QByteArray &fileFormat);
 
