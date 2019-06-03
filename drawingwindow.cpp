@@ -6,6 +6,7 @@
 #include <QColorDialog>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QImageWriter>
 
 DrawingWindow::DrawingWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -79,4 +80,45 @@ void DrawingWindow::about()
                "terminating the application.</p><p> The example also demonstrates "
                "how to use QPainter to draw an image in real time, as well as "
                "to repaint widgets.</p>"));
+}
+
+// Good example on how to connect slots and shortcuts to actions.
+void DrawingWindow::createActions()
+{
+    openAct = new QAction(tr("&Open..."), this);
+    openAct->setShortcuts(QKeySequence::Open);
+    connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
+
+    foreach (QByteArray format, QImageWriter::supportedImageFormats()) {
+        QString text = tr("%1...").arg(QString(format).toUpper());
+
+        QAction *action = new QAction(text, this);
+        action->setData(format);
+        connect(action, SIGNAL(triggered()), this, SLOT(save()));
+        saveAsActs.append(action);
+    }
+
+    printAct = new QAction(tr("&Print..."), this);
+    connect(printAct, SIGNAL(triggered()), scribbleArea, SLOT(print()));
+
+    exitAct = new QAction(tr("E&xit"), this);
+    exitAct->setShortcuts(QKeySequence::Quit);
+    connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
+
+    penColorAct = new QAction(tr("&Pen Color..."), this);
+    connect(penColorAct, SIGNAL(triggered()), this, SLOT(penColor()));
+
+    penWidthAct = new QAction(tr("Pen &Width..."), this);
+    connect(penWidthAct, SIGNAL(triggered()), this, SLOT(penWidth()));
+
+    clearScreenAct = new QAction(tr("&Clear Screen"), this);
+    clearScreenAct->setShortcut(tr("Ctrl+L"));
+    connect(clearScreenAct, SIGNAL(triggered()),
+            scribbleArea, SLOT(clearImage()));
+
+    aboutAct = new QAction(tr("&About"), this);
+    connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
+
+    aboutQtAct = new QAction(tr("About &Qt"), this);
+    connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 }
