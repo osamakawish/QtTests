@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QColorDialog>
 #include <QInputDialog>
+#include <QMessageBox>
 
 DrawingWindow::DrawingWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -62,4 +63,20 @@ void DrawingWindow::penWidth()
     if (ok) {
         scribbleArea->setPenWidth(width);
     }
+}
+
+void DrawingWindow::about()
+{
+    QMessageBox::about(this, tr("About Scribble"),
+            tr("<p>The <b>Scribble</b> example shows how to use QMainWindow as the "
+               "base widget for an application, and how to reimplement some of "
+               "QWidget's event handlers to receive the events generated for "
+               "the application's widgets:</p><p> We reimplement the mouse event "
+               "handlers to facilitate drawing, the paint event handler to "
+               "update the application and the resize event handler to optimize "
+               "the application's appearance. In addition we reimplement the "
+               "close event handler to intercept the close events before "
+               "terminating the application.</p><p> The example also demonstrates "
+               "how to use QPainter to draw an image in real time, as well as "
+               "to repaint widgets.</p>"));
 }
