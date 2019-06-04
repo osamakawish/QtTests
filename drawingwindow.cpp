@@ -123,6 +123,7 @@ void DrawingWindow::createActions()
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 }
 
+// Useful for creating menus dynamically.
 void DrawingWindow::createMenus()
 {
     saveAsMenu = new QMenu(tr("&Save As"), this);
@@ -150,3 +151,39 @@ void DrawingWindow::createMenus()
     menuBar()->addMenu(optionMenu);
     menuBar()->addMenu(helpMenu);
 }
+
+bool DrawingWindow::maybeSave()
+{
+    if (scribbleArea->isModified()) {
+        // prompt save file dialog.
+        QMessageBox::StandardButton ret;
+        // Message box with save, discard, and cancel buttons.
+        ret = QMessageBox::warning(this,tr("Scribble"),
+                                   tr("This image has been modified. Do you want to save changes?"),
+                                   QMessageBox::Save|QMessageBox::Discard|QMessageBox::Cancel);
+
+        // Returns true if file is saved. False if cancelled.
+        if (ret == QMessageBox::Save) {
+            return saveFile("png");
+        } else if (ret == QMessageBox::Cancel) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool DrawingWindow::saveFile(const QByteArray &fileFormat)
+{
+    QString basePath = QDir::currentPath() + "/untitled." + fileFormat;
+
+    QString fileName = QFileDialog::getSaveFileName(this,tr("Save As"),
+                                                    tr("%1 Files (*.%2);;All Files (*)")
+                                                    .arg(QString::fromLatin1(fileFormat.toUpper()))
+                                                    .arg(QString::fromLatin1(fileFormat)));
+
+    if (fileName.isEmpty()) {
+        return scribbleArea->saveImage(fileName,fileFormat);
+    } return false;
+}
+
+
